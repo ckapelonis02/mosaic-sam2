@@ -1,8 +1,8 @@
-# Mosaic Tesserae Segmentation with SAM2 (Fine-Tuning)
+# Mosaic Tesserae Segmentation with SAM 2 (Fine-Tuning)
 
 **Work in Progress**
 
-This repository contains experiments for fine-tuning Meta's **SAM2 (Segment Anything Model)** to segment mosaic images into individual tesserae.  
+This repository contains experiments for fine-tuning Meta's **SAM 2 (Segment Anything Model)** to segment mosaic images into individual tesserae.  
 
 ## Features
 
