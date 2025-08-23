@@ -42,7 +42,7 @@ def read_dataset(images_path, masks_path, file_names):
         for file in file_names
     ]
 
-def read_batch(data_dict, index, max_masks=1, max_res=1024):
+def read_batch(data_dict, index, max_masks=-1, max_res=1024):
     """
     Read a single dataset entry and prepare masks and points for SAM 2 training.
     

@@ -1,5 +1,4 @@
 import os
-import argparse
 import random
 import numpy as np
 import torch
@@ -23,19 +22,9 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] += ",expandable_segments:True"
 hydra.core.global_hydra.GlobalHydra.instance().clear()
 hydra.initialize_config_module('sam2', version_base='1.2')
 
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description="Train SAM2 model on mosaic images")
-parser.add_argument("--images_path", type=str, required=True, help="Path to training images")
-parser.add_argument("--masks_path", type=str, required=True, help="Path to corresponding masks")
-parser.add_argument("--epochs", type=int, required=True, help="Number of training epochs")
-parser.add_argument("--grad_steps", type=int, default=4, help="Number of gradient accumulation steps")
-parser.add_argument("--train_percentage", type=float, default=0.8, help="Percentage of data used for training")
-parser.add_argument("--score_weight", type=float, default=0.2, help="Weighting factor for the dice loss")
-args = parser.parse_args()
-
 # Load SAM 2 model from configuration and checkpoint
-config_file = "../sam2_configs/sam2_hiera_t.yaml"
-ckpt_path = "checkpoints/sam2_hiera_tiny.pt"
+config_file = "../sam2_configs/sam2_hiera_l.yaml"
+ckpt_path="checkpoints/sam2_hiera_large.pt",
 sam2_model = build_sam2(
     config_file=config_file,
     ckpt_path=ckpt_path,
@@ -55,16 +44,16 @@ scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=1e-6)
 
 # Begin training loop
 train_sam2(
-    images_path=args.images_path,
-    masks_path=args.masks_path,
-    epochs=args.epochs,
-    grad_steps=args.grad_steps,
+    images_path="/kaggle/input/mosaic-dataset/data/train_data/images",
+    masks_path="/kaggle/input/mosaic-dataset/data/train_data/masks",
+    epochs=10,
+    grad_steps=4,
     log_dir=f"runs/sam2_training_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
     predictor=predictor,
     optimizer=optimizer,
     scheduler=scheduler,
     seed=22,
-    train_percentage=args.train_percentage,
+    train_percentage=0.8,
     score_weight=0.2,
     config_file=config_file,
     ckpt_path=ckpt_path,
