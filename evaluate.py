@@ -9,8 +9,8 @@ def read_masks(gt_mask_path, pred_mask_path):
     """
     Read ground-truth and predicted masks as binary numpy arrays.
     """
-    gt_mask = cv2.imread(gt_mask_path, cv2.IMREAD_GRAYSCALE)
-    pred_mask = cv2.imread(pred_mask_path, cv2.IMREAD_GRAYSCALE)
+    gt_mask = 1 - cv2.imread(gt_mask_path, cv2.IMREAD_GRAYSCALE)
+    pred_mask = 1 - cv2.imread(pred_mask_path, cv2.IMREAD_GRAYSCALE)
     
     if gt_mask is None or pred_mask is None:
         raise ValueError(f"Invalid image path: {gt_mask_path} or {pred_mask_path}")
@@ -63,13 +63,7 @@ def compute_metrics_batch(gt_masks_dir, pred_masks_dir):
     return pd.DataFrame(metrics_list).mean()
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate predicted masks against ground-truth masks")
-    parser.add_argument("--gt_masks_dir", type=str, required=True, help="Directory containing ground-truth masks")
-    parser.add_argument("--pred_masks_dir", type=str, required=True, help="Directory containing predicted masks")
-    
-    args = parser.parse_args()
-
-    mean_metrics = compute_metrics_batch(args.gt_masks_dir, args.pred_masks_dir).round(3)
+    mean_metrics = compute_metrics_batch("gt_dir", "pred_dir").round(3)
     
     print("\n### Metrics ###")
     print(mean_metrics)

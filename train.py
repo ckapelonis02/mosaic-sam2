@@ -44,8 +44,8 @@ scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=1e-6)
 
 # Begin training loop
 train_sam2(
-    images_path="/kaggle/input/mosaic-dataset/data/train_data/images",
-    masks_path="/kaggle/input/mosaic-dataset/data/train_data/masks",
+    images_path="/home/ckapelonis/Downloads/test",
+    masks_path="/home/ckapelonis/Desktop/thesis/mosaic-sam2/data/train_data/masks",
     epochs=10,
     grad_steps=4,
     log_dir=f"runs/sam2_training_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
