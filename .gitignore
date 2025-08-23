@@ -1,0 +1,43 @@
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+.env/
+*.env
+.conda/
+.venv/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# PyTorch / TensorFlow checkpoints, model weights, and outputs
+checkpoints/
+runs/
+*.pt
+*.torch
+*.ckpt
+*.h5
+
+# Dataset outputs, masks, and temporary results
+data/datasets/**/output_masks/
+validation_results_temp/
+*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.tmp
+
+# Miscellaneous
+*.swp
+*.swo
+.idea/
+.vscode/
