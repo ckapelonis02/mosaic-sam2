@@ -23,8 +23,8 @@ hydra.core.global_hydra.GlobalHydra.instance().clear()
 hydra.initialize_config_module('sam2', version_base='1.2')
 
 # Load SAM 2 model from configuration and checkpoint
-config_file = "../sam2_configs/sam2_hiera_l.yaml"
-ckpt_path="checkpoints/sam2_hiera_large.pt",
+config_file = "../sam2_configs/sam2_hiera_t.yaml"
+ckpt_path="checkpoints/sam2_hiera_tiny.pt",
 sam2_model = build_sam2(
     config_file=config_file,
     ckpt_path=ckpt_path,

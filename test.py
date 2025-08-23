@@ -20,8 +20,8 @@ hydra.initialize_config_module("sam2", version_base="1.2")
 
 # Build the SAM2 model
 sam2_model = build_sam2(
-    config_file = "../sam2_configs/sam2_hiera_l.yaml",
-    ckpt_path = "/kaggle/input/segment-anything-2/pytorch/sam2-hiera-large/1/sam2_hiera_large.pt",
+    config_file = "../sam2_configs/sam2_hiera_t.yaml",
+    ckpt_path="checkpoints/sam2_hiera_tiny.pt",
     device="cuda",
     apply_postprocessing=False
 )
@@ -29,7 +29,7 @@ sam2_model = build_sam2(
 # Initialize the automatic mask generator
 mask_generator = SAM2AutomaticMaskGenerator(
     model=sam2_model,
-    points_per_side=32,
+    points_per_side=8,
     points_per_batch=4,
     pred_iou_thresh=0.8,
     stability_score_thresh=0.8,
@@ -51,9 +51,9 @@ mask_generator = SAM2AutomaticMaskGenerator(
 # Run inference and generate masks
 test_generator(
     mask_generator=mask_generator,
-    images_path="/kaggle/input/mosaic-dataset/data/test_data/images",
-    output_path="/kaggle/input/mosaic-dataset/data/test_data/masks",
-    crops_csv_file="/kaggle/input/mosaic-dataset/data/test_data/test_crops.csv",
+    images_path="/home/ckapelonis/Downloads/test/",
+    output_path="/home/ckapelonis/Downloads/ela",
+    crops_csv_file=None,
     max_mask_crop_region=0.1,
     show_masks=False
 )
