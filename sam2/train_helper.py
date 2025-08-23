@@ -67,11 +67,12 @@ def read_batch(data_dict, index, max_masks=1, max_res=1024):
     img = cv2.resize(img, (int(img.shape[1] * r), int(img.shape[0] * r)))
     ann_map = cv2.resize(ann_map, (int(ann_map.shape[1] * r), int(ann_map.shape[0] * r)), interpolation=cv2.INTER_NEAREST)
 
-    ann_map = (ann_map > 127).astype(np.uint8) * 255  # Binarize mask
+    ann_map = 255 - (ann_map > 127).astype(np.uint8) * 255  # Binarize mask
 
     masks, points = [], []
+    
     # Find contours in the inverted mask (background=0)
-    contours, _ = cv2.findContours((255 - ann_map).copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(ann_map.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for i, contour in enumerate(contours):
         if (i == max_masks): break

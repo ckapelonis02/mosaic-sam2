@@ -24,7 +24,7 @@ runs/
 *.h5
 
 # Dataset outputs, masks, and temporary results
-data/datasets/**/output_masks/
+data/
 validation_results_temp/
 *.csv
 
