@@ -54,7 +54,7 @@ def read_batch(data_dict, index, max_masks=-1, max_res=1024):
 
     Returns:
         image: Resized RGB image.
-        masks: Array of binary masks.
+        masks: Array of binary masks (255 = tessera, 0 = background).
         points: Array of point prompts (centroids of masks).
         labels: Array of ones (positive labels for prompts).
     """
@@ -65,17 +65,23 @@ def read_batch(data_dict, index, max_masks=-1, max_res=1024):
     # Rescale image and mask to fit max_res
     r = np.min([max_res / img.shape[1], max_res / img.shape[0]])
     img = cv2.resize(img, (int(img.shape[1] * r), int(img.shape[0] * r)))
-    ann_map = cv2.resize(ann_map, (int(ann_map.shape[1] * r), int(ann_map.shape[0] * r)), interpolation=cv2.INTER_NEAREST)
+    ann_map = cv2.resize(
+        ann_map, 
+        (int(ann_map.shape[1] * r), int(ann_map.shape[0] * r)), 
+        interpolation=cv2.INTER_NEAREST
+    )
 
-    ann_map = 255 - (ann_map > 127).astype(np.uint8) * 255  # Binarize mask
+    # Binarize mask: 255 = tessera, 0 = background
+    ann_map = (ann_map > 127).astype(np.uint8) * 255
 
     masks, points = [], []
     
-    # Find contours in the inverted mask (background=0)
+    # Find contours of tesserae (white regions)
     contours, _ = cv2.findContours(ann_map.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for i, contour in enumerate(contours):
-        if (i == max_masks): break
+        if (i == max_masks): 
+            break
         if len(contour) >= 3:
             mask = np.zeros_like(ann_map)
             cv2.drawContours(mask, [contour], -1, 255, thickness=cv2.FILLED)
@@ -85,11 +91,11 @@ def read_batch(data_dict, index, max_masks=-1, max_res=1024):
             if M["m00"] != 0:
                 cx = int(M["m10"] / M["m00"])
                 cy = int(M["m01"] / M["m00"])
-                if (cx != 0 and cy != 0):
-                    points.append([[cx, cy]])
-                    masks.append(mask)
+                points.append([[cx, cy]])
+                masks.append(mask)
 
     return img, np.array(masks), np.array(points), np.ones([len(masks), 1])
+
 
 def visualize_entry(img, masks, points):
     """
@@ -101,14 +107,9 @@ def visualize_entry(img, masks, points):
 
     # Display combined inverted mask
     plt.figure(figsize=(8, 8))
-    plt.imshow(combined_mask + 1, cmap='gray')
+    plt.imshow(combined_mask, cmap='gray')
     plt.axis("on")
-    plt.title("Inverted Combined Mask")
-    try:
-        plt.get_current_fig_manager().full_screen_toggle()
-    except:
-        pass
-    plt.tight_layout()
+    plt.title("Combined Mask")
     plt.show()
 
     # Display image with point prompts
@@ -118,11 +119,6 @@ def visualize_entry(img, masks, points):
         plt.plot(point[0][0], point[0][1], 'ro', markersize=7)
     plt.axis("on")
     plt.title("Image with Points")
-    try:
-        plt.get_current_fig_manager().full_screen_toggle()
-    except:
-        pass
-    plt.tight_layout()
     plt.show()
 
 def process_batch(predictor, image, masks, input_point, input_label, device="cuda"):
