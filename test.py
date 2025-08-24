@@ -51,8 +51,8 @@ mask_generator = SAM2AutomaticMaskGenerator(
 # Run inference and generate masks
 test_generator(
     mask_generator=mask_generator,
-    images_path="/home/ckapelonis/Downloads/test/",
-    output_path="/home/ckapelonis/Downloads/ela",
+    images_path="/kaggle/input/mosaic-dataset/data/test_data/images",
+    output_path="./tests_output",
     crops_csv_file=None,
     max_mask_crop_region=0.1,
     show_masks=False

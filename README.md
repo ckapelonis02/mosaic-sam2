@@ -3,6 +3,11 @@
 ## Overview
 **Mosaic-SAM2** is a PyTorch-based framework for segmenting mosaic images into individual tesserae using the **SAM2 model**.
 
+<p align="center">
+  <img src="figures/butterfly.jpg" alt="Butterfly Mosaic Original" width="300"/>
+  <img src="figures/butterfly.png" alt="Butterfly Binary Mask" width="300"/>
+</p>
+
 ## Requirements
 
 ### Python
@@ -34,6 +39,8 @@ data/
 └── masks/    # Binary masks (.png) with tesserae as white (255)
 ```
 
+The dataset used in this project is available at https://huggingface.co/datasets/ckapelonis02/mosaics-images.
+
 ## Training
 
 The `train_sam2` function is the core of fine-tuning SAM 2. For details check the `train.py` module.
@@ -61,6 +68,8 @@ train_sam2(
     mask_threshold=0.5,           # (validation configs) Threshold for binarizing predicted masks
 )
 ```
+
+The trained checkpoint is available at https://huggingface.co/ckapelonis02/SAM2-mosaic.
 
 ## Testing / Inference
 
