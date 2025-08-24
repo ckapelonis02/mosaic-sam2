@@ -4,8 +4,8 @@
 **Mosaic-SAM2** is a PyTorch-based framework for segmenting mosaic images into individual tesserae using the **SAM2 model**.
 
 <p align="center">
-  <img src="figures/butterfly.jpg" alt="Butterfly Mosaic Original" width="300"/>
-  <img src="figures/butterfly.png" alt="Butterfly Binary Mask" width="300"/>
+  <img src="figures/butterfly.jpg" alt="Butterfly Mosaic Original" width="400"/>
+  <img src="figures/butterfly.png" alt="Butterfly Binary Mask" width="400"/>
 </p>
 
 ## Requirements
