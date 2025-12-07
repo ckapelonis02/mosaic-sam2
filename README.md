@@ -175,6 +175,7 @@ This summary gives a quick overview of segmentation performance for your dataset
 
 ## Citation
 
+```bibtex
 @INPROCEEDINGS{11268445,
   author={Kapelonis, Charilaos and Antonakakis, Marios and Politof, Konstantinos and Antoniadis, Aristomenis and Zervakis, Michalis},
   booktitle={2025 IEEE International Conference on Imaging Systems and Techniques (IST)}, 
@@ -186,3 +187,4 @@ This summary gives a quick overview of segmentation performance for your dataset
   keywords={Deep learning;Image segmentation;Visualization;Art;Computational modeling;Transfer learning;Imaging;Predictive models;Reflection;Real-time systems;Mosaics;Deep Learning;Image Segmentation;SAM 2;Transfer Learning},
   doi={10.1109/IST66504.2025.11268445}
 }
+```
