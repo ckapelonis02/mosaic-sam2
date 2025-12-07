@@ -130,7 +130,14 @@ mosaic_003,3,2
 ```
 
 ## Evaluation of Predicted Masks
-
+@inproceedings{Kapelonis2025MosaicSegmentation,
+  author = {Charilaos Kapelonis and Marios Antonakakis and Konstantinos Politof and Aristomenis Antoniadis and Others},
+  title = {Automated Mosaic Tesserae Segmentation via Deep Learning Techniques},
+  booktitle = {2025 IEEE International Conference on Imaging Systems and Techniques (IST)},
+  year = {2025},
+  publisher = {IEEE},
+  doi = {10.1109/IST66504.2025.11268445}
+}
 This script evaluates predicted segmentation masks against ground-truth masks using common segmentation metrics:
 - Dice Coefficient
 - Intersection over Union (IoU)
@@ -168,4 +175,13 @@ This summary gives a quick overview of segmentation performance for your dataset
 
 ## Citation
 
-TODO
+@INPROCEEDINGS{11268445,
+  author={Kapelonis, Charilaos and Antonakakis, Marios and Politof, Konstantinos and Antoniadis, Aristomenis and Zervakis, Michalis},
+  booktitle={2025 IEEE International Conference on Imaging Systems and Techniques (IST)}, 
+  title={Automated Mosaic Tesserae Segmentation via Deep Learning Techniques}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Deep learning;Image segmentation;Visualization;Art;Computational modeling;Transfer learning;Imaging;Predictive models;Reflection;Real-time systems;Mosaics;Deep Learning;Image Segmentation;SAM 2;Transfer Learning},
+  doi={10.1109/IST66504.2025.11268445}}
