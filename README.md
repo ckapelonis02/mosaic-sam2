@@ -184,4 +184,5 @@ This summary gives a quick overview of segmentation performance for your dataset
   number={},
   pages={1-6},
   keywords={Deep learning;Image segmentation;Visualization;Art;Computational modeling;Transfer learning;Imaging;Predictive models;Reflection;Real-time systems;Mosaics;Deep Learning;Image Segmentation;SAM 2;Transfer Learning},
-  doi={10.1109/IST66504.2025.11268445}}
+  doi={10.1109/IST66504.2025.11268445}
+}
